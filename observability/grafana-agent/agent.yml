@@ -1,0 +1,61 @@
+server:
+  log_level: info
+  http_listen_port: 12345
+
+metrics:
+  wal_directory: /tmp/wal
+  global:
+    scrape_interval: 15s
+    remote_write:
+      - url: ${METRICS_REMOTE_WRITE_URL}
+        basic_auth:
+          username: ${METRICS_REMOTE_WRITE_BASIC_USERNAME}
+          password: ${METRICS_REMOTE_WRITE_BASIC_PASSWORD}
+  configs:
+    - name: agent
+      scrape_configs:
+        - job_name: hwp_be_metrics
+          static_configs:
+            - targets: ["localhost:8080"]
+          metrics_path: "/q/metrics"
+
+traces:
+  configs:
+    - name: agent
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              endpoint: localhost:4316
+            http:
+      remote_write:
+        - endpoint: ${TRACES_REMOTE_WRITE_ENDPOINT}
+          insecure: ${TRACES_REMOTE_WRITE_INSECURE} # no TLS
+          basic_auth:
+            username: ${TRACES_REMOTE_WRITE_BASIC_USERNAME}
+            password: ${TRACES_REMOTE_WRITE_BASIC_PASSWORD}
+      batch:
+        timeout: 5s
+        send_batch_size: 10
+
+logs:
+  configs:
+    - name: agent
+      positions:
+        filename: /tmp/positions.yaml
+      scrape_configs:
+        - job_name: syslog
+          syslog:
+            listen_address: 0.0.0.0:5140
+            idle_timeout: 1800s
+            label_structured_data: yes
+            labels:
+              job: "syslog"
+          relabel_configs:
+            - source_labels: ["__syslog_message_hostname"]
+              target_label: "host"
+      clients:
+        - url: ${LOGS_REMOTE_WRITE_URL}
+          basic_auth:
+            username: ${LOGS_REMOTE_WRITE_BASIC_USERNAME}
+            password: ${LOGS_REMOTE_WRITE_BASIC_PASSWORD}

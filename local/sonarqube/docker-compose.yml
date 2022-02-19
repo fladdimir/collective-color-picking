@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  sonarqube:
+    image: sonarqube:latest
+    network_mode: host
+    volumes:
+      - ./data:/opt/sonarqube/data

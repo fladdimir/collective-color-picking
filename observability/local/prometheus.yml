@@ -1,0 +1,9 @@
+# prometheus is just receiving remote-writes
+# and not scraping actively
+# global:
+#   scrape_interval: 15s
+# scrape_configs:
+#   - job_name: "hwp_be"
+#     static_configs:
+#       - targets: ["localhost:8080"]
+#     metrics_path: "/q/metrics"

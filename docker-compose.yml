@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  hwp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    network_mode: host
+    environment:
+
+      # nginx listen port
+      PORT: 5001
+
+      # grafana agent:
+      METRICS_REMOTE_WRITE_URL: http://localhost:9090/api/v1/write
+      METRICS_REMOTE_WRITE_BASIC_USERNAME: BasicUsername
+      METRICS_REMOTE_WRITE_BASIC_PASSWORD: BasicPassword
+
+      TRACES_REMOTE_WRITE_ENDPOINT: localhost:4317
+      TRACES_REMOTE_WRITE_INSECURE: 'true'
+      TRACES_REMOTE_WRITE_BASIC_USERNAME: BasicUsername
+      TRACES_REMOTE_WRITE_BASIC_PASSWORD: BasicPassword
+
+      LOGS_REMOTE_WRITE_URL: http://localhost:3100/loki/api/v1/push
+      LOGS_REMOTE_WRITE_BASIC_USERNAME: BasicUsername
+      LOGS_REMOTE_WRITE_BASIC_PASSWORD: BasicPassword
+
+      # heroku-like DB URL:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+      # avoid ssl parameter when processing DATABASE_URL:
+      CI: "true"
