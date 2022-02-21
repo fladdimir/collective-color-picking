@@ -1,4 +1,4 @@
-# collaborative color picking
+# collective color picking
 
 [![Build](https://github.com/fladdimir/collective-color-picking/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/fladdimir/collective-color-picking/actions/workflows/build.yml)
 
@@ -18,6 +18,8 @@ sample websocket application with logging
 - rsyslog (nginx log translation)
 
 ## deploy to heroku
+
+automatically on push to `heroku` branch, or manually:
 
 ```sh
 # deploy new version:
