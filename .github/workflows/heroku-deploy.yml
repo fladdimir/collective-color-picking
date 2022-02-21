@@ -1,0 +1,21 @@
+name: heroku deploy
+on:
+  push:
+    branches:
+      - heroku
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        # https://github.com/AkhileshNS/heroku-deploy
+        with:
+          branch: heroku
+          usedocker: true
+          heroku_app_name: "collective-color-picking"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          healthcheck: https://collective-color-picking.herokuapp.com/api/color
+          rollbackonhealthcheckfailed: false # tbd

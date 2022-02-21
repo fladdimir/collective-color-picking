@@ -1,6 +1,12 @@
 *
-!be_hwp/build/*runner
+# helper
 !deploy
-!fe_hwp/dist
 !nginx
 !observability/grafana-agent
+# be
+!be_hwp
+be_hwp/build
+# fe
+!fe_hwp
+fe_hwp/node_modules
+fe_hwp/dist

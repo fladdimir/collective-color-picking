@@ -13,6 +13,9 @@ curl -o "agent-linux-amd64.zip" -L "https://github.com/grafana/agent/releases/do
 # extract the binary
 unzip "agent-linux-amd64.zip"
 
+# verify checksum
+sha256sum -c SHA256SUMS --status --strict
+
 # make sure it is executable
 chmod a+x "agent-linux-amd64"
 
