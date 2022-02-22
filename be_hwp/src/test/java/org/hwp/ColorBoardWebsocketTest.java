@@ -1,5 +1,6 @@
 package org.hwp;
 
+import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hwp.position.Position.posOf;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.ContainerProvider;
@@ -64,6 +66,8 @@ class ColorBoardWebsocketTest {
             assertThat(c1receivedPosCol1.getId()).isEqualTo(c1receivedObj1.getId());
             assertThat(c1receivedPosCol1.getPosition()).isEqualTo(posOf(0, 0));
 
+            assertNumOfConnectedUsersMetric(1);
+
             try (Session session2 = wsContainer.connectToServer(new Client(CLIENT_RECEIVED_MESSAGES_2), uri)) {
 
                 // onopen2 -> broadcast
@@ -86,6 +90,8 @@ class ColorBoardWebsocketTest {
                         .filter(pc -> pc.getId().equals(c2receivedObj1.getId())).findAny().orElseThrow();
                 assertThat(c2receivedPosCol1.getPosition()).isEqualTo(posOf(0, 1));
                 assertThat(c2receivedPosCol1.getColor()).isEqualTo(c1receivedPosCol2.getColor());
+
+                assertNumOfConnectedUsersMetric(2);
 
                 // onmessage1 -> broadcast
                 var color11 = c1receivedPosCol1.getColor();
@@ -120,6 +126,22 @@ class ColorBoardWebsocketTest {
                 assertThat(c2receivedPosCol2_c1.getColor()).isEqualTo(c1firstSentUpdate); // change received
             }
         }
+    }
+
+    private void assertNumOfConnectedUsersMetric(int n) throws InterruptedException {
+        Thread.sleep(1000);
+        String connected_users_metric = given()
+                .when().get("/q/metrics")
+                .then()
+                .statusCode(200)
+                .extract().body().asString();
+
+        var key = "x_connected_users";
+        assertThat(connected_users_metric).contains(key);
+        var value = Stream.of(connected_users_metric.split("\n")).filter(s -> s.startsWith(key))
+                .map(s -> s.split(" ")[1]).map(Double::valueOf).map(Double::intValue)
+                .findAny();
+        assertThat(value).isPresent().get().isEqualTo(n);
     }
 
     @ClientEndpoint
