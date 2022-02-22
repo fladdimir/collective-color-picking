@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.validation.ConstraintViolationException;
 import javax.websocket.CloseReason;
@@ -22,6 +23,8 @@ import org.hwp.ColorBoard.PositionColor;
 import org.hwp.color.Color;
 import org.jboss.logging.Logger;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Tags;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.smallrye.common.annotation.Blocking;
 import lombok.AllArgsConstructor;
@@ -38,6 +41,12 @@ public class ColorBoardWebsocket {
     final ColorBoard board;
     final ObjectMapper jsonMapper;
     final Logger logger;
+    final MeterRegistry metrics;
+
+    @PostConstruct
+    void postConstruct() {
+        metrics.gaugeCollectionSize("x_connected_users", Tags.empty(), sessions.keySet());
+    }
 
     private final Map<String, Session> sessions = new ConcurrentHashMap<>();
 
