@@ -1,9 +1,9 @@
-package org.hwp.color;
+package org.hwp.application;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.hwp.color.ColorValidation.Rgb0255;
+import org.hwp.domain.color.ColorValidation.Rgb0255;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package org.hwp.color;
+package org.hwp.domain.color;
 
 import javax.enterprise.context.ApplicationScoped;
 

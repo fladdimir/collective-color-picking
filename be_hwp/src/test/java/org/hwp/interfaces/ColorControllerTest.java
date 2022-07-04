@@ -1,4 +1,4 @@
-package org.hwp.color;
+package org.hwp.interfaces;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.hwp.QuarkusPostgresLocalOrTestContainerTestResource;
+import org.hwp.domain.color.Color;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

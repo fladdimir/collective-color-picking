@@ -1,4 +1,4 @@
-package org.hwp.color;
+package org.hwp.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.hwp.QuarkusPostgresLocalOrTestContainerTestResource;
+import org.hwp.domain.color.Color;
+import org.hwp.domain.color.ColorConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,7 @@ class ColorServiceTest {
     ColorRepository colorRepository;
 
     @Inject
-    ColorPersistenceService colorService;
+    ColorPersistenceServiceImpl colorService;
 
     @Inject
     ColorConfig colorConfig;

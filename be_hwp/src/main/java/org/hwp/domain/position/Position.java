@@ -1,4 +1,4 @@
-package org.hwp.position;
+package org.hwp.domain.position;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
-package org.hwp.color;
+package org.hwp.domain.color;
 
-import org.hwp.color.ColorValidation.Rgb0255;
+import org.hwp.domain.color.ColorValidation.Rgb0255;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
-package org.hwp;
+package org.hwp.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hwp.position.Position.posOf;
+import static org.hwp.domain.position.Position.posOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.hwp.ColorBoard.PositionColor;
-import org.hwp.ColorBoard.PositionIterator;
-import org.hwp.color.Color;
-import org.hwp.color.ColorPersistenceService;
-import org.hwp.position.Position;
+import org.hwp.domain.ColorBoard.PositionColor;
+import org.hwp.domain.ColorBoard.PositionIterator;
+import org.hwp.domain.color.Color;
+import org.hwp.domain.color.ColorPersistenceService;
+import org.hwp.domain.position.Position;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

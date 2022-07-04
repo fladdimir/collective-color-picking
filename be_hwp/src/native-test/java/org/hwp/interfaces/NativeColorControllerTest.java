@@ -1,4 +1,4 @@
-package org.hwp.color;
+package org.hwp.interfaces;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

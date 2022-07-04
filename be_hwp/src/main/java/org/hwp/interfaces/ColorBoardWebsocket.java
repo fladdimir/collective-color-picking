@@ -1,4 +1,4 @@
-package org.hwp;
+package org.hwp.interfaces;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -19,8 +19,9 @@ import javax.websocket.server.ServerEndpoint;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.hwp.ColorBoard.PositionColor;
-import org.hwp.color.Color;
+import org.hwp.domain.ColorBoard;
+import org.hwp.domain.ColorBoard.PositionColor;
+import org.hwp.domain.color.Color;
 import org.jboss.logging.Logger;
 
 import io.micrometer.core.instrument.MeterRegistry;
@@ -124,7 +125,7 @@ public class ColorBoardWebsocket {
     @AllArgsConstructor
     @NoArgsConstructor
     @RegisterForReflection
-    static class IndividualPositionColorDto {
+    public static class IndividualPositionColorDto {
         private String id;
         private Collection<PositionColor> positionColors;
     }

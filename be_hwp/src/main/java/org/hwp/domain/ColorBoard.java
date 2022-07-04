@@ -1,9 +1,9 @@
-package org.hwp;
+package org.hwp.domain;
 
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.concat;
-import static org.hwp.position.Position.posOf;
+import static org.hwp.domain.position.Position.posOf;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -19,9 +19,9 @@ import java.util.stream.StreamSupport;
 import javax.enterprise.context.ApplicationScoped;
 import javax.validation.Valid;
 
-import org.hwp.color.Color;
-import org.hwp.color.ColorPersistenceService;
-import org.hwp.position.Position;
+import org.hwp.domain.color.Color;
+import org.hwp.domain.color.ColorPersistenceService;
+import org.hwp.domain.position.Position;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class ColorBoard {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    static class PositionColor {
+    public static class PositionColor {
         private String id;
         private Position position;
         private Color color;

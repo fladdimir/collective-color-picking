@@ -1,10 +1,13 @@
-package org.hwp.color;
+package org.hwp.application;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.validation.Validator;
 
+import org.hwp.domain.color.Color;
+import org.hwp.domain.color.ColorConfig;
+import org.hwp.domain.color.ColorPersistenceService;
 import org.jboss.logging.Logger;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @ApplicationScoped
 @RequiredArgsConstructor
-public class ColorPersistenceService {
+public class ColorPersistenceServiceImpl implements ColorPersistenceService {
 
     final ColorConfig colorConfig;
     final ColorRepository colorRepository;

@@ -1,9 +1,9 @@
-package org.hwp;
+package org.hwp.interfaces;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hwp.position.Position.posOf;
 import static org.awaitility.Awaitility.*;
+import static org.hwp.domain.position.Position.posOf;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,8 +21,9 @@ import javax.websocket.Session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.hwp.ColorBoardWebsocket.IndividualPositionColorDto;
-import org.hwp.color.Color;
+import org.hwp.QuarkusPostgresLocalOrTestContainerTestResource;
+import org.hwp.domain.color.Color;
+import org.hwp.interfaces.ColorBoardWebsocket.IndividualPositionColorDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
